@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "ms-catalogo-service", path = "/producto")
 public interface CatalogoFeign {
-    @CircuitBreaker(name = "pedidoListarPorIdCB",fallbackMethod = "fallBackPedidoListarPorIdCB")
+    @CircuitBreaker(name = "productoListarPorIdCB",fallbackMethod = "fallBackPedidoListarPorIdCB")
     @GetMapping("/{id}")
     ResponseEntity<ProductoDto> productoBuscarPorId(@PathVariable(required = true) Integer id) ;
 

@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@CircuitBreaker(name = "pedidoListarPorIdCB",fallbackMethod = "fallBackPedidoListarPorIdCB")
+@CircuitBreaker(name = "clienteListarPorIdCB",fallbackMethod = "fallBackPedidoListarPorIdCB")
 @FeignClient(name = "ms-cliente-service", path = "/cliente")
 public interface ClienteFeign {
     @GetMapping("/{id}")
