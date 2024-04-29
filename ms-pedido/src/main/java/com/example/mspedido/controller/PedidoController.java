@@ -2,6 +2,7 @@ package com.example.mspedido.controller;
 
 import com.example.mspedido.entity.Pedido;
 import com.example.mspedido.service.PedidoService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,7 @@ import java.util.List;
 public class PedidoController {
     @Autowired
     private PedidoService pedidoService;
-
+    @CircuitBreaker(name= "pedidoListarPorIdCB", fallbackMethod = "fallBackPedidoListarPorIdCB")
     @GetMapping
     ResponseEntity<List<Pedido>> lista(){
         return ResponseEntity.ok(pedidoService.lista());
@@ -36,6 +37,5 @@ public class PedidoController {
     public ResponseEntity<List<Pedido>> eleminar(@PathVariable(required = true) Integer id){
         pedidoService.eleminar(id);
         return ResponseEntity.ok(pedidoService.lista());
-
     }
 }
